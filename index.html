@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA Champions Kick-off: June 11, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #1B2F4A;
+    --navy-md: #2A4365;
+    --navy-lt: #3A5A80;
+    --red:     #E13429;
+    --red-lt:  #F04A3C;
+    --white:   #FFFFFF;
+    --off:     #F7F8FA;
+    --gray:    #8A9BB0;
+    --text:    #1B2F4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    background: #0D1B2E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    animation: fadeIn .35s ease;
+  }
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .logo-mark { width: 40px; height: 40px; flex-shrink: 0; }
+  .logo-mark-sm { width: 28px; height: 28px; flex-shrink: 0; }
+
+  #s1 { background: var(--navy); align-items: center; justify-content: center; text-align: center; padding: 60px; }
+  #s1 .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 28px; }
+  #s1 h1 { font-size: clamp(44px, 6vw, 72px); font-weight: 800; color: var(--white); line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px; }
+  #s1 h1 span { color: var(--red); }
+  #s1 .subtitle { font-size: 18px; font-weight: 400; color: rgba(255,255,255,.6); margin-bottom: 60px; }
+  #s1 .meta-row { display: flex; gap: 40px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  #s1 .meta-pill { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 100px; padding: 10px 22px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8); letter-spacing: .5px; }
+  #s1 .meta-pill strong { color: var(--white); }
+  #s1 .logo-top { position: absolute; top: 36px; left: 44px; display: flex; align-items: center; gap: 12px; }
+  #s1 .logo-top span { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+
+  #s2 { background: var(--white); padding: 0; }
+  #s2 .top-bar { background: var(--navy); padding: 28px 60px; display: flex; align-items: center; gap: 16px; }
+  #s2 .top-bar h2 { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  #s2 .body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px; text-align: center; }
+  #s2 .label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 24px; }
+  #s2 .big-quote { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--navy); line-height: 1.4; max-width: 860px; margin-bottom: 52px; }
+  #s2 .big-quote em { font-style: normal; color: var(--red); }
+  #s2 .checklist { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; max-width: 900px; }
+  #s2 .check-item { display: flex; align-items: center; gap: 10px; background: var(--off); border: 1px solid #E5EAF0; border-radius: 10px; padding: 12px 20px; font-size: 13px; font-weight: 600; color: var(--navy); }
+  #s2 .check-item .dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+
+  #s3 { background: var(--off); padding: 0; }
+  #s3 .top-bar { background: var(--navy); padding: 28px 60px; display: flex; align-items: center; gap: 16px; }
+  #s3 .top-bar h2 { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  #s3 .body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px; gap: 24px; }
+  #s3 .blocks { display: flex; gap: 28px; width: 100%; max-width: 1080px; justify-content: center; }
+  #s3 .block { flex: 1; background: var(--white); border-radius: 16px; padding: 36px 32px; border: 1px solid #E0E6EE; position: relative; overflow: hidden; }
+  #s3 .block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  #s3 .block-num { font-size: 48px; font-weight: 800; color: #EEF1F5; line-height: 1; margin-bottom: 16px; }
+  #s3 .block-title { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; line-height: 1.2; }
+  #s3 .block-desc { font-size: 13px; font-weight: 400; color: var(--gray); line-height: 1.6; }
+  #s3 .block-tag { display: inline-block; margin-top: 20px; background: #EEF1F5; color: var(--navy-md); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 12px; border-radius: 6px; }
+
+  #s4 { background: var(--navy); padding: 0; }
+  #s4 .inner { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px; }
+  #s4 .part-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+  #s4 h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 800; color: var(--white); text-align: center; margin-bottom: 16px; letter-spacing: -.5px; }
+  #s4 .intro-text { font-size: 16px; color: rgba(255,255,255,.55); text-align: center; max-width: 640px; margin-bottom: 52px; line-height: 1.6; }
+  #s4 .rounds-row { display: flex; gap: 16px; max-width: 1080px; width: 100%; justify-content: center; flex-wrap: wrap; }
+  #s4 .round-chip { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 18px 24px; text-align: center; flex: 1; min-width: 160px; max-width: 200px; }
+  #s4 .round-chip .r-num { font-size: 28px; font-weight: 800; color: var(--red); line-height: 1; margin-bottom: 8px; }
+  #s4 .round-chip .r-name { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); line-height: 1.4; }
+  #s4 .logistics { margin-top: 36px; background: rgba(225,52,41,.12); border: 1px solid rgba(225,52,41,.3); border-radius: 12px; padding: 16px 28px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,.8); text-align: center; max-width: 680px; }
+  #s4 .logistics strong { color: var(--white); }
+
+  .round-slide { background: var(--white); padding: 0; }
+  .round-slide .top-bar { background: var(--navy); padding: 24px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .round-slide .top-bar .left { display: flex; align-items: center; gap: 16px; }
+  .round-slide .top-bar h2 { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  .round-slide .top-bar .round-badge { background: var(--red); color: white; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; }
+  .round-slide .body { flex: 1; display: flex; gap: 0; }
+  .round-slide .left-panel { width: 340px; background: var(--off); padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #E0E6EE; flex-shrink: 0; }
+  .round-slide .left-panel .round-num { font-size: 72px; font-weight: 800; color: #E8EDF3; line-height: 1; margin-bottom: 12px; }
+  .round-slide .left-panel .round-title { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 16px; }
+  .round-slide .left-panel .round-goal { font-size: 13px; color: var(--gray); line-height: 1.6; padding-top: 16px; border-top: 1px solid #DDE3EC; }
+  .round-slide .left-panel .round-goal strong { color: var(--navy); font-weight: 600; }
+  .round-slide .right-panel { flex: 1; padding: 48px 52px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+  .round-slide .step { display: flex; gap: 18px; align-items: flex-start; }
+  .round-slide .step-num { width: 32px; height: 32px; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .round-slide .step-content h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .round-slide .step-content p { font-size: 13px; color: var(--gray); line-height: 1.5; }
+  .round-slide .highlight-box { background: #FFF3F2; border: 1px solid #F5C6C2; border-left: 4px solid var(--red); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #7A2020; line-height: 1.5; margin-top: 8px; }
+  .round-slide .highlight-box strong { color: var(--red); }
+  .round-slide .highlight-navy { background: #EFF3FA; border: 1px solid #C8D5E8; border-left: 4px solid var(--navy); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--navy-md); line-height: 1.5; margin-top: 8px; }
+
+  #s9 { background: var(--white); padding: 0; }
+  #s9 .top-bar { background: var(--navy); padding: 28px 60px; display: flex; align-items: center; gap: 16px; }
+  #s9 .top-bar h2 { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  #s9 .body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 60px; }
+  #s9 .timeline { display: flex; gap: 0; width: 100%; max-width: 1100px; align-items: stretch; }
+  #s9 .tl-item { flex: 1; display: flex; flex-direction: column; position: relative; }
+  #s9 .tl-item:not(:last-child)::after { content: '\2192'; position: absolute; right: -14px; top: 38px; font-size: 22px; color: #C8D5E8; z-index: 2; }
+  #s9 .tl-date { font-size: 12px; font-weight: 700; color: var(--red); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  #s9 .tl-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.2; }
+  #s9 .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+  #s9 .tl-bullets li { font-size: 12px; color: var(--gray); line-height: 1.45; padding-left: 14px; position: relative; }
+  #s9 .tl-bullets li::before { content: '-'; position: absolute; left: 0; color: #C8D5E8; }
+  #s9 .tl-card { background: var(--off); border: 1px solid #E0E8F0; border-radius: 12px; padding: 20px; height: 100%; display: flex; flex-direction: column; }
+  #s9 .tl-item.active-today .tl-card { background: #FFF3F2; border-color: #F5C6C2; }
+  #s9 .tl-item.golive .tl-card { background: #EFF8F5; border-color: #B3DDD3; }
+  #s9 .tl-item.golive .tl-date { color: #1A7B5E; }
+  #s9 .tl-item.golive .tl-title { color: #0F4F3B; }
+
+  #s10 { background: var(--navy); padding: 0; }
+  #s10 .inner { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 52px 60px; gap: 28px; }
+  #s10 .part-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); }
+  #s10 h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; color: var(--white); text-align: center; letter-spacing: -.5px; }
+  #s10 .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; max-width: 900px; }
+  #s10 .card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 24px 28px; }
+  #s10 .card h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  #s10 .card p { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6; }
+  #s10 .card p strong { color: rgba(255,255,255,.8); }
+  #s10 .bottom-bar { background: rgba(225,52,41,.15); border: 1px solid rgba(225,52,41,.3); border-radius: 12px; padding: 18px 32px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.85); text-align: center; max-width: 820px; }
+  #s10 .bottom-bar strong { color: var(--white); }
+
+  .nav-bar { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; background: rgba(11,22,40,.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 10px 20px; z-index: 100; }
+  .nav-bar button { background: rgba(255,255,255,.1); border: none; color: white; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+  .nav-bar button:hover { background: rgba(255,255,255,.2); }
+  .nav-bar button:disabled { opacity: .3; cursor: default; }
+  .nav-bar .counter { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6); min-width: 60px; text-align: center; letter-spacing: .5px; }
+  .nav-bar .dots { display: flex; gap: 6px; align-items: center; }
+  .nav-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.25); transition: background .2s, transform .2s; cursor: pointer; }
+  .nav-bar .dot.active { background: var(--red); transform: scale(1.4); }
+  .top-bar-logo { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .top-bar-logo span { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.35); }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <div class="slide active" id="s1">
+    <div class="logo-top">
+      <svg class="logo-mark" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg>
+      <span>Gaston Schul &middot; Project Nova</span>
+    </div>
+    <div class="eyebrow">Project Nova</div>
+    <h1>Champions<br><span>Kick-off</span></h1>
+    <div class="subtitle">Platform guided show &amp; roadmap to go-live</div>
+    <div class="meta-row">
+      <div class="meta-pill"><strong>June 11, 2026</strong></div>
+      <div class="meta-pill"><strong>Venlo</strong> &middot; In-person</div>
+      <div class="meta-pill">Ole, Marco &amp; Maarten</div>
+    </div>
+  </div>
+
+  <div class="slide" id="s2">
+    <div class="top-bar"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Alignment for Today</h2><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body">
+      <div class="label">Goal of this session</div>
+      <div class="big-quote">"By the end of today, you know <em>how the platform works</em>, how to run a declaration, how to <em>test it</em>, where to send feedback, and <em>what happens next</em>."</div>
+      <div class="checklist">
+        <div class="check-item"><div class="dot"></div>How the platform works</div>
+        <div class="check-item"><div class="dot"></div>How to run a declaration end-to-end</div>
+        <div class="check-item"><div class="dot"></div>What testing means over the next 3 weeks</div>
+        <div class="check-item"><div class="dot"></div>Where to send feedback &amp; tickets</div>
+        <div class="check-item"><div class="dot"></div>What comes next: reconnects, go-live</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" id="s3">
+    <div class="top-bar"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Today's Agenda</h2><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body"><div class="blocks">
+      <div class="block"><div class="block-num">01</div><div class="block-title">Platform Guided Show</div><div class="block-desc">A live, hands-on walk-through of the NOVA platform. We run 5 escalating declaration rounds together: from simple to your own real work.</div><div class="block-tag">Part 1 &middot; Hands-on</div></div>
+      <div class="block"><div class="block-num">02</div><div class="block-title">Timeline</div><div class="block-desc">What happens over the next 3-4 weeks. Testing expectations, reconnects with Herma per office, and the go-live schedule by location.</div><div class="block-tag">Part 2 &middot; The Plan</div></div>
+      <div class="block"><div class="block-num">03</div><div class="block-title">Next Steps &amp; Questions</div><div class="block-desc">Concrete next steps: how to log feedback and tickets, what's expected of you as a champion, and open questions from the group.</div><div class="block-tag">Part 3 &middot; Closing</div></div>
+    </div></div>
+  </div>
+
+  <div class="slide" id="s4">
+    <div style="position:absolute;top:32px;left:44px;display:flex;align-items:center;gap:12px;"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35)">Project Nova</span></div>
+    <div class="inner">
+      <div class="part-label">Part 1 of 3</div>
+      <h2>Platform Guided Show</h2>
+      <div class="intro-text">We run 5 rounds together: escalating in complexity. You don't need anything prepared. Documents provided for rounds 1-3. Rounds 4-5 are yours.</div>
+      <div class="rounds-row">
+        <div class="round-chip"><div class="r-num">R1</div><div class="r-name">Simple Declaration</div></div>
+        <div class="round-chip"><div class="r-num">R2</div><div class="r-name">Missing Document</div></div>
+        <div class="round-chip"><div class="r-num">R3</div><div class="r-name">Full Line Items</div></div>
+        <div class="round-chip"><div class="r-num">R4</div><div class="r-name">Your Own</div></div>
+        <div class="round-chip"><div class="r-num">R5</div><div class="r-name">Your Own</div></div>
+      </div>
+      <div class="logistics"><strong>Logistics:</strong> Each of the ~20 participants receives a personal email with the declaration document, titled with your own name. Search for yours, triage it yourself.</div>
+    </div>
+  </div>
+
+  <div class="slide round-slide" id="s5">
+    <div class="top-bar"><div class="left"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Platform Guided Show</h2><span class="round-badge">Round 1</span></div><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body"><div class="left-panel"><div class="round-num">01</div><div class="round-title">The Simple Declaration</div><div class="round-goal"><strong>Goal:</strong> Build confidence. The happy-path flow end-to-end: almost nothing can go wrong with this one.</div></div>
+    <div class="right-panel">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Receive your email</h4><p>Your personal document arrives in the platform inbox, titled with your name. Find it and open it.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Triage</h4><p>The platform has classified the incoming mail. Review the classification: does it match? Confirm or correct.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Extraction</h4><p>Open the dossier. The AI has extracted all relevant data from the document. Review the extracted fields.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Submit / Download</h4><p>The declaration is ready. Submit it through the platform or download the prepared declaration file.</p></div></div>
+      <div class="highlight-navy"><strong>Note:</strong> Stream connection requires a manual upload step at this stage: we do this together. Temporary until the API integration is live.</div>
+    </div></div>
+  </div>
+
+  <div class="slide round-slide" id="s6">
+    <div class="top-bar"><div class="left"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Platform Guided Show</h2><span class="round-badge">Round 2</span></div><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body"><div class="left-panel"><div class="round-num">02</div><div class="round-title">The Missing Document</div><div class="round-goal"><strong>Goal:</strong> Test the email functionality. A required document is missing: see how the platform handles it and how it comes back in.</div></div>
+    <div class="right-panel">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Completeness check flags a gap</h4><p>The platform detects a missing document after triage. A red flag appears in the dossier: the declaration is incomplete.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Trigger the outbound email</h4><p>The platform drafts an email to the client requesting the missing document. Review, adjust if needed, and send.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Response comes back in</h4><p>When the client replies with the document, the platform automatically links it to the open dossier.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Dossier updates automatically</h4><p>The completeness flag clears. Extracted fields update. The declaration is ready to proceed.</p></div></div>
+      <div class="highlight-box"><strong>Watch for:</strong> How the dossier status changes in real-time as the reply comes in. This is the key workflow moment.</div>
+    </div></div>
+  </div>
+
+  <div class="slide round-slide" id="s7">
+    <div class="top-bar"><div class="left"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Platform Guided Show</h2><span class="round-badge">Round 3</span></div><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body"><div class="left-panel"><div class="round-num">03</div><div class="round-title">Full Line Items</div><div class="round-goal"><strong>Goal:</strong> See the platform handle volume and complexity: 30-40 line items, potentially with mixed or incomplete extraction fields.</div></div>
+    <div class="right-panel">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Complex document: many lines</h4><p>This declaration has 30-40 line items. See how the AI extracts each one, assigns HS codes, and structures the output.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Review extraction quality</h4><p>Some fields may be incomplete or ambiguous. Review how the platform flags them and how you correct them in the UI.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Validation checks at scale</h4><p>The platform runs all 16 priority validation checks across every line. Review flagged issues and resolve them.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Time this one</h4><p>Note how long this round takes you. We're building a baseline: your round 3 time today is the starting point we'll improve against.</p></div></div>
+      <div class="highlight-box"><strong>Important:</strong> If something is slow or unclear, it may be a prompt issue on our side. Raise it and we'll log it.</div>
+    </div></div>
+  </div>
+
+  <div class="slide round-slide" id="s8">
+    <div class="top-bar"><div class="left"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Platform Guided Show</h2><span class="round-badge">Rounds 4-5</span></div><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body"><div class="left-panel"><div class="round-num">4-5</div><div class="round-title">Your Own Declarations</div><div class="round-goal"><strong>Goal:</strong> Connect the training to your real work. Pick a declaration you actually did recently and run it through the platform yourself.</div></div>
+    <div class="right-panel">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Pick a recent declaration</h4><p>Choose the last iteration you did: ideally something from yesterday or earlier this week. Real data, familiar context.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Run it end-to-end</h4><p>Full flow: triage, extraction, completeness, validation, submit or download. You're in the driving seat now.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Compare to your old way of working</h4><p>How long did it take? What was easier? What was harder? This builds the business case.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Log your time &amp; first impression</h4><p>After both rounds: open the Notion form and add one row: number of declarations, total time, and how it felt overall.</p></div></div>
+      <div class="highlight-navy"><strong>From today forward:</strong> Log every session in Notion. Not per declaration: per session. Time-box it (1, 2, or 3 hours), then log.</div>
+    </div></div>
+  </div>
+
+  <div class="slide" id="s9">
+    <div class="top-bar"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><h2>Part 2: Timeline</h2><div class="top-bar-logo"><span>Project Nova</span></div></div>
+    <div class="body"><div class="timeline">
+      <div class="tl-item active-today"><div class="tl-card"><div class="tl-date">Today &middot; June 11</div><div class="tl-title">Champions Kick-off</div><ul class="tl-bullets"><li>Platform guided show: 5 rounds</li><li>Hands-on with your own declarations</li><li>Testing accounts active</li><li>Venlo &middot; In-person</li></ul></div></div>
+      <div class="tl-item"><div class="tl-card"><div class="tl-date">June 11 to July 2</div><div class="tl-title">Testing Phase</div><ul class="tl-bullets"><li>Do as many declarations as possible</li><li>Log time + feedback per session in Notion</li><li>Raise tickets via interim tool</li><li>Mid-late June: Validation sprint</li></ul></div></div>
+      <div class="tl-item"><div class="tl-card"><div class="tl-date">~1 Week In</div><div class="tl-title">Reconnects with Herma</div><ul class="tl-bullets"><li>Per office &middot; ~30 min each</li><li>All on one day if possible</li><li>Are you ready to train others?</li><li>~20 declarations logged per champion</li></ul></div></div>
+      <div class="tl-item golive"><div class="tl-card"><div class="tl-date">July 6</div><div class="tl-title">Go-live &middot; Oldenzaal / Veendam</div><ul class="tl-bullets"><li>You train your office's end users</li><li>Ole, Marco &amp; Rene present on-site</li><li>Same guided show format</li><li>Rotterdam follows after</li></ul></div></div>
+      <div class="tl-item"><div class="tl-card"><div class="tl-date">Aug 10 +</div><div class="tl-title">Next Sprint Cycle</div><ul class="tl-bullets"><li>Full Stream API integration</li><li>JIRA connection live</li><li>UK Control Tower roadmap</li><li>Platform improvements from feedback</li></ul></div></div>
+    </div></div>
+  </div>
+
+  <div class="slide" id="s10">
+    <div style="position:absolute;top:32px;left:44px;display:flex;align-items:center;gap:12px;"><svg class="logo-mark-sm" viewBox="0 0 57.673 57.673" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="57.673" height="57.673" rx="9.839" fill="#E13429"/><path d="M34.9 22.367a6.149 6.149 0 112.442 2.021l-2.064 2.5a9.326 9.326 0 10-2.441-2.021z" transform="translate(-9.046 -2.818)" fill="#fff"/><path d="M34.59 46.409a9.109 9.109 0 00-2.114-7.523l-2.064 2.5a6.083 6.083 0 011.139 3.543c0 .144-.012.287-.022.428z" transform="translate(-8.993 -11.499)" fill="#fff"/><path d="M24.5 46.984a6.134 6.134 0 11-2.531-8.99l2.065-2.5a9.29 9.29 0 103.533 12.546z" transform="translate(-2.997 -10.132)" fill="#fff"/><path d="M53.364 45.965a9.3 9.3 0 00-8.137 4.812l3.062 1.056a6.122 6.122 0 11-1.05 3.426c0-.144.012-.286.022-.428L44.2 53.776a9.289 9.289 0 109.164-7.811" transform="translate(-13.031 -13.592)" fill="#fff"/></svg><span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35)">Project Nova</span></div>
+    <div class="inner">
+      <div class="part-label">Part 3 of 3</div>
+      <h2>Next Steps &amp; Questions</h2>
+      <div class="grid">
+        <div class="card"><h4><span class="icon">&#x1F9EA;</span> Your role as tester</h4><p>Do as many declarations as possible over the next 3 weeks. You're not just testing: you're building the baseline that proves the value of this platform.</p></div>
+        <div class="card"><h4><span class="icon">&#x1F4CA;</span> How to log</h4><p>Use the <strong>Notion form</strong> after each session. Time-box your work (1-3 hrs), then add one row: how many declarations, total time, overall feel. Not per declaration.</p></div>
+        <div class="card"><h4><span class="icon">&#x1F3AB;</span> Tickets &amp; feedback</h4><p>Something broken or unclear? Log it via our <strong>interim ticketing tool</strong> (not JIRA yet: that comes later). We track everything and prioritise weekly.</p></div>
+        <div class="card"><h4><span class="icon">&#x1F3E2;</span> Your champion role at go-live</h4><p>At go-live <strong>(July 6, your office)</strong>, you train your colleagues: the same way you were trained today. Be present on go-live day. Rene coordinates.</p></div>
+      </div>
+      <div class="bottom-bar"><strong>Questions?</strong> Raise them now, or reach out directly to Ole, Marco or Maarten. We're here throughout the testing period.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-bar">
+  <button id="prev" onclick="navigate(-1)" disabled>&#8592;</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter">1 / 10</span>
+  <button id="next" onclick="navigate(1)">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  const dotsEl = document.getElementById('dots');
+  const counterEl = document.getElementById('counter');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    dotsEl.children[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    counterEl.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+  function navigate(dir) {
+    const next = current + dir;
+    if (next >= 0 && next < total) goTo(next);
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); navigate(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); navigate(-1); }
+  });
+  document.querySelector('.deck').addEventListener('click', e => {
+    if (!e.target.closest('.nav-bar')) navigate(1);
+  });
+</script>
+</body>
+</html>
